@@ -1,0 +1,10 @@
+services:
+- "{{ lookup('example/services') }}"
+- name: Crack
+  token: R256
+  settings:
+    name: wack
+    size: 30
+meta:
+  tags: 
+  - "{{ lookup('example/tags') }}"

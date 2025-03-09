@@ -1,0 +1,5 @@
+name: service A
+token: R256
+meta:
+  tags: 
+  - "{{ lookup('example/tags') }}"
