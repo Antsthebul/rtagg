@@ -1,0 +1,5 @@
+services:
+  - name: service A
+    team: Red
+  - name: service B
+    team: Blue

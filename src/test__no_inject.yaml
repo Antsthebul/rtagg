@@ -1,0 +1,7 @@
+services:
+  - name: Test
+    port: 5000
+meta:
+  tags:
+    - AWS
+    - PROD

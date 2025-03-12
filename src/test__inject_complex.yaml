@@ -1,0 +1,15 @@
+services:
+  - name: Micro A
+    token: H256
+    settings:
+      name: config 7
+      size: 10
+  - name: Micro B
+    token: R256
+    settings:
+      name: config 1
+      size: 30
+meta:
+  tags: 
+    - AWS
+    - PROD
