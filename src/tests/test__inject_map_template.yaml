@@ -1,0 +1,1 @@
+service: "{{ lookup_file('.', 'src/tests/test__inject_map_child.yaml') }}"
