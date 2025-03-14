@@ -1,12 +1,43 @@
+use clap::builder::TypedValueParser as _;
 use std::{
+    fmt::Display,
     fs::{read_dir, File},
     io::{Read, Write},
     path::Path,
+    str::FromStr,
 };
 
 use clap::Parser;
 use regex::Regex;
 use saphyr::{Yaml, YamlEmitter};
+
+#[derive(Debug, Clone)]
+enum Extension {
+    JSON,
+    YAML,
+}
+
+impl Display for Extension {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        let s = match self {
+            Self::JSON => "JSON",
+            Self::YAML => "YAML",
+        };
+        s.fmt(f)
+    }
+}
+
+impl FromStr for Extension {
+    type Err = String;
+
+    fn from_str(s: &str) -> Result<Self, Self::Err> {
+        match s {
+            "JSON" => Ok(Self::JSON),
+            "YAML" => Ok(Self::YAML),
+            _ => Err(format!("Unknown extension type {s}")),
+        }
+    }
+}
 
 #[cfg(test)]
 mod tests;
@@ -16,8 +47,13 @@ mod tests;
 #[command(version, about, long_about = None)]
 struct Args {
     #[arg(short, long)]
-    /// Root YAML template file
+    /// Root template file
     template: String,
+
+    #[arg(short, long, value_parser = clap::builder::PossibleValuesParser::new(["JSON", "YAML"])
+        .map(|s|s.parse::<Extension>().unwrap()))]
+    /// File type being parsed and generated
+    extension: Extension,
 
     #[arg(short, long, default_value_t = String::from("output.yaml"))]
     /// Output name of generated YAML file
@@ -28,6 +64,7 @@ fn main() {
     let args = Args::parse();
 
     let template_file = args.template;
+    
     // Read template
     let mut file = File::open(&template_file)
         .expect(&format!("check permissions/existence of '{template_file}'"));
@@ -47,6 +84,7 @@ fn main() {
     out_str = out_str.strip_prefix("---\n").unwrap().to_string();
 
     dest.write_all(out_str.as_bytes()).unwrap();
+    println!("Success!")
 }
 
 /// Reads a YAML file and returns a YAML object
@@ -136,14 +174,13 @@ fn lookup_file(mut dir: &str, mut file_name: &str) -> Vec<Yaml> {
 
 /// Recuirsively modifies a YAML doucment
 fn build_section(yaml: &mut Yaml, current_section: Option<&str>) {
-    println!("me val {:?}", yaml);
     if let Some(arr) = yaml.as_mut_vec() {
         let mut new_vec = vec![];
 
         for item in arr.into_iter() {
             if let Some(item) = item.as_str() {
                 let (updated, data) = parse_function_for_section(current_section, item);
-                
+
                 if updated {
                     new_vec.extend(data);
                 } else {
@@ -168,9 +205,8 @@ fn build_section(yaml: &mut Yaml, current_section: Option<&str>) {
                     *value = Yaml::Hash(data.iter().next().unwrap().as_hash().unwrap().to_owned());
                 }
             } else if value.is_array() {
-               
                 build_section(value, Some(section_name));
-            } else if value.is_hash(){
+            } else if value.is_hash() {
                 build_section(value, Some(section_name));
             }
         }

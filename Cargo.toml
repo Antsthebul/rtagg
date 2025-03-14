@@ -1,9 +1,10 @@
 [package]
 name = "rtgen"
+description="Template builer/aggregation tool"
 version = "0.1.0"
 edition = "2021"
 
 [dependencies]
-clap = { version = "4.5.31", features = ["derive"] }
+clap = { version = "4.5.31", features = ["derive", "unstable-doc"] }
 regex = "1.11.1"
 saphyr = "0.0.3"
