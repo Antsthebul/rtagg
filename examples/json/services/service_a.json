@@ -1,0 +1,7 @@
+{
+  "name":"service A",
+  "token":"R256",
+  "meta": {
+    "tags":["teamA"]
+  }
+}

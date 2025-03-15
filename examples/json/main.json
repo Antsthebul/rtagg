@@ -1,0 +1,16 @@
+{
+    "services":[
+
+        "{{ lookup('examples/json/services') }}",
+         {
+            "name":"Crack",
+            "settings":{
+                "name": "wack",
+                "size": 30
+            }
+         }
+    ],
+    "meta":{
+        "tags": ["{{ lookup('examples/json/tags') }}"]
+    }
+}
