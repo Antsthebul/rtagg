@@ -28,7 +28,10 @@ pub fn build_section_json(json: &mut Value, current_section: Option<&str>) {
                 }
             } else if item.is_object() {
                 build_section_json(item, None);
+                new_vec.push(item.clone());
+
             } else {
+                // literals should only make it here
                 new_vec.push(item.clone());
             }
         }

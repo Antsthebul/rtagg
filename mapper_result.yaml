@@ -1,0 +1,6 @@
+service:
+  product: Service A
+  team: Cool ones
+  tags:
+    - A
+    - B

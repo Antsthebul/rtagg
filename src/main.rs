@@ -10,6 +10,10 @@ use std::{fmt::Display, str::FromStr};
 use clap::Parser;
 use generator::{Extension, Generator};
 
+#[cfg(test)]
+mod build_json_test;
+mod build_yaml_test;
+
 impl Display for Extension {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         let s = match self {
@@ -32,8 +36,7 @@ impl FromStr for Extension {
     }
 }
 
-#[cfg(test)]
-mod tests;
+
 
 /// YAML template aggregator
 #[derive(Parser, Debug)]
