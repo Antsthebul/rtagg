@@ -7,7 +7,7 @@
 - JSON
 
 #### Purpose
-Inspired by Terraform, rtgen is a CLI tool to easily aggregate various files homogenous file types to create a single file. Rather than having an extremely verbose file, due to repeating object definitions, you can create a template, and "compile" to a single file, aggregating small, modularized files, to help make your codebase much more maintainable.
+Inspired by Terraform, **rtgen** is a CLI tool to easily aggregate various homogenous file types to produce a single, complete file. Rather than having an extremely verbose file, due to repeating object definitions, **rtgen** allows you to create a template, and "compile" to a single file, from smaller, modularized files, which results in much more maintable codebase.
 
 ### Usage
  Follow these steps or run the example
