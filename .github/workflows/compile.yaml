@@ -1,5 +1,8 @@
 name: Cross Compile Rust Binary
-on: push
+on:
+  push:
+    tags:
+      - 'v*'
 
 jobs:
   release:
