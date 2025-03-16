@@ -1,6 +1,0 @@
-{
-  "providers": [
-    "{{ lookup_file('.', 'src/tests/test__inject_list_child.json') }}",
-    "Azure"
-  ]
-}

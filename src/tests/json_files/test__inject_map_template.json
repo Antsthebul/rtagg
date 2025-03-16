@@ -1,0 +1,3 @@
+{
+    "service": "{{ lookup_file('.', 'src/tests/json_files/test__inject_map_child.json') }}"
+}

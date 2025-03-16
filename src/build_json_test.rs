@@ -10,7 +10,7 @@ use std::{fs::File,
 /// Helper function to return file as a string
 fn get_test_json_string(file_name: &str) -> String {
     let mut path = PathBuf::new();
-    path.push("src/tests");
+    path.push("src/tests/json_files");
     path.push(file_name);
     let mut inner_file = File::open(path).expect(&format!("check permissions for '{file_name}'"));
     let mut json_as_str = String::new();

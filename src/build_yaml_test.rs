@@ -2,7 +2,6 @@ use saphyr::{Yaml, YamlEmitter};
 
 use crate:: build_yaml::build_section_yaml;
 
-use super::*;
 use std::{fs::File, 
     io::{Read, Write},
     path::PathBuf};
@@ -11,7 +10,7 @@ use std::{fs::File,
 /// Helper function to return file as a string
 fn get_test_yaml_string(file_name: &str) -> String {
     let mut path = PathBuf::new();
-    path.push("src/tests");
+    path.push("src/tests/yaml_files");
     path.push(file_name);
     let mut inner_file = File::open(path).expect(&format!("check permissions for '{file_name}'"));
     let mut yaml_as_str = String::new();
@@ -53,9 +52,6 @@ fn test_build_section_map() {
     emitter.dump(doc).unwrap();
 
     out_str = out_str.strip_prefix("---\n").unwrap().to_string();
-
-    let mut des = File::create("mapper_result.yaml").unwrap();
-    des.write_all(out_str.as_bytes()).unwrap();
 
     assert_eq!(expected_output, out_str);
 }

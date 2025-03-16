@@ -1,0 +1,3 @@
+providers:
+  - "{{ lookup_file('.', 'src/tests/yaml_files/test__inject_list_child.yaml') }}"
+  - Azure

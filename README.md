@@ -7,7 +7,7 @@
 - JSON
 
 #### Purpose
-Inspired by Terraform, rtgen is a CLI tool to easily aggregate various files to create a single file. Rather than having an extremely verbose file, due to repeating object definitions, you can create a template, and "compile" to a single file, aggregating small, modularized files.
+Inspired by Terraform, rtgen is a CLI tool to easily aggregate various files homogenous file types to create a single file. Rather than having an extremely verbose file, due to repeating object definitions, you can create a template, and "compile" to a single file, aggregating small, modularized files, to help make your codebase much more maintainable.
 
 ### Usage
  Follow these steps or run the example
@@ -37,5 +37,9 @@ greetings:
 ```
 #### Example
 Run `make run-example-yaml` to how `examples/main.yaml` is used as a template, and creates the output seen in `output.yaml`
+
+## Caveats
+- JSON output, although correct, may show map objects with keys in a different order
+- Currently child tempaltes cannot contain refernces other files (it will not be evaulated and is returned as an empty string)
 
 See the docs for more info
